@@ -39,7 +39,7 @@ impl InstantiateMsg {
         }
         if !self.has_valid_symbol() {
             return Err(StdError::generic_err(
-                "Ticker symbol is not in expected format [a-zA-Z\\-]{3,12}",
+                "Ticker symbol is not in expected format [a-zA-Z\\-]{2,12}",
             ));
         }
         if self.decimals > 18 {
@@ -58,7 +58,7 @@ impl InstantiateMsg {
 
     fn has_valid_symbol(&self) -> bool {
         let bytes = self.symbol.as_bytes();
-        if bytes.len() < 3 || bytes.len() > 12 {
+        if bytes.len() < 2 || bytes.len() > 12 {
             return false;
         }
         for byte in bytes.iter() {
